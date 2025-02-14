@@ -47,7 +47,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Wild Cards RPG - Extracción de Carta")
+st.title("Wild Cards RPG")
 st.write("Saca una carta")
 
 # 2. Lectura del archivo Excel (usando ruta relativa)
@@ -91,7 +91,7 @@ else:
     suit_mapping = {
         'corazones': 'Corazones',
         'diamantes': 'Diamantes',
-        'picas': 'Espadas',   # "picas" se mapea a "Espadas"
+        'espadas': 'Espadas',
         'treboles': 'Tréboles'
     }
 
@@ -229,7 +229,7 @@ else:
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         try:
             imagen = Image.open(os.path.join("cartas_naipes", ruta_relativa))
-            st.image(imagen, caption=f"Carta: {numero_original} de {pinta_original}", width=300, use_container_width=False)
+            st.image(imagen, caption=f"Carta: {numero_original} de {pinta_original}", width=300, use_column_width=True)
         except Exception as e:
             st.error(f"No se pudo cargar la imagen: {e}")
         st.markdown("</div>", unsafe_allow_html=True)
