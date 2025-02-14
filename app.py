@@ -6,18 +6,18 @@ import base64
 import os
 from PIL import Image
 
-# Asegurarse de que openpyxl está instalado
-try:
-    import openpyxl
-except ImportError:
-    st.error("La librería openpyxl no está instalada. Por favor instálala usando 'pip install openpyxl'.")
-
-# 1. Configuración de la página centrada
+# 1. Configuración de la página centrada (debe ser el primer comando de Streamlit)
 st.set_page_config(
     page_title="Wild Cards RPG",
     page_icon="🃏",
     layout="centered"
 )
+
+# Asegurarse de que openpyxl está instalado
+try:
+    import openpyxl
+except ImportError:
+    st.error("La librería openpyxl no está instalada. Por favor instálala usando 'pip install openpyxl'.")
 
 # CSS para centrar contenido y ajustar estilos (sin bullets)
 st.markdown(
@@ -217,6 +217,8 @@ else:
         ruta = carta['Ruta Completa']
         archivo_imagen = os.path.basename(ruta)
         # Construir la ruta relativa para la imagen en la carpeta "cartas_naipes"
+        # Reemplazar las barras invertidas por barras diagonales en la ruta
+        archivo_imagen = archivo_imagen.replace("\\", "/")
         ruta_imagen = os.path.join("cartas_naipes", archivo_imagen)
         
         # Valor de la carta
