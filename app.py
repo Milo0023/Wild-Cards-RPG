@@ -191,7 +191,7 @@ else:
             encoded_video = base64.b64encode(video_bytes).decode()
             video_html = f'''
             <div style="text-align: center;">
-                <video width="{width}" autoplay muted>
+                <video width="{width}" autoplay muted playsinline>
                     <source src="data:video/mp4;base64,{encoded_video}" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
