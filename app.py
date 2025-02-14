@@ -202,7 +202,7 @@ else:
             return f"<p>Error cargando video: {e}</p>"
 
     # 10. Lógica principal de la aplicación
-    if st.button("Extraer Carta"):
+    if st.button("Toma tu Carta"):
         # Mostrar el video para generar expectación durante 5 segundos
         video_path = r"mazo.mp4"  # Ruta relativa (el archivo debe estar en la raíz del repositorio)
         video_placeholder = st.empty()
