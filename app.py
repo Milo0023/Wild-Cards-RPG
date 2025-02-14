@@ -10,8 +10,7 @@ from PIL import Image
 try:
     import openpyxl
 except ImportError:
-    import sys
-    !{sys.executable} -m pip install openpyxl
+    st.error("La librería openpyxl no está instalada. Por favor instálala usando 'pip install openpyxl'.")
 
 # 1. Configuración de la página centrada
 st.set_page_config(
