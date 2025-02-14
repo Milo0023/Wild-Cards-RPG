@@ -6,18 +6,18 @@ import base64
 import os
 from PIL import Image
 
-# Asegurarse de que openpyxl está instalado
-try:
-    import openpyxl
-except ImportError:
-    st.error("La librería openpyxl no está instalada. Por favor instálala usando 'pip install openpyxl'.")
-
-# 1. Configuración de la página centrada
+# 1. Configuración de la página centrada (debe ser el primer comando de Streamlit)
 st.set_page_config(
     page_title="Wild Cards RPG",
     page_icon="🃏",
     layout="centered"
 )
+
+# Asegurarse de que openpyxl está instalado
+try:
+    import openpyxl
+except ImportError:
+    st.error("La librería openpyxl no está instalada. Por favor instálala usando 'pip install openpyxl'.")
 
 # CSS para centrar contenido y ajustar estilos (sin bullets)
 st.markdown(
@@ -213,11 +213,8 @@ else:
         
         # Extraer una carta aleatoria
         carta = df_cartas.sample(n=1).iloc[0]
-        # Suponiendo que en el Excel se guarda la ruta completa, usamos solo el nombre del archivo
-        ruta = carta['Ruta Completa']
-        archivo_imagen = os.path.basename(ruta)
-        # Construir la ruta relativa para la imagen en la carpeta "cartas_naipes"
-        ruta_imagen = os.path.join("cartas_naipes", archivo_imagen)
+        # Suponiendo que en el Excel se guarda la ruta completa
+        ruta_relativa = carta['Ruta Completa']
         
         # Valor de la carta
         numero_original = str(carta['Carta']).strip()
@@ -231,7 +228,7 @@ else:
         # Mostrar imagen de la carta centrada
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         try:
-            imagen = Image.open(ruta_imagen)
+            imagen = Image.open(os.path.join("cartas_naipes", ruta_relativa))
             st.image(imagen, caption=f"Carta: {numero_original} de {pinta_original}", width=300, use_container_width=False)
         except Exception as e:
             st.error(f"No se pudo cargar la imagen: {e}")
