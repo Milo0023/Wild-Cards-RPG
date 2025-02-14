@@ -47,8 +47,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("Wild Cards RPG - Extracción de Carta")
-st.write("Saca una carta")
+st.title("Wild Cards RPG")
+st.write("Una Carta marca tu destino...")
 
 # 2. Lectura del archivo Excel (usando ruta relativa)
 excel_path = "cartas_list.xlsx"
@@ -61,18 +61,18 @@ else:
 
     # 3. Textos narrativos generales y de muerte
     narrative_texts = [
-        "La Marca del Virus: 'Dicen que el Virus no elige… pero miente quien lo dice. Algunos despiertan con fuego en las venas, otros con sombras en los huesos. Y unos pocos… simplemente no despiertan.",
-        "Noctámbulos en las Calles: 'A esta hora, solo los necios y los poderosos caminan sin miedo. Los Jokers se esconden entre las sombras de los callejones, y los Aces patrullan desde las alturas.",
-        "Cartas Marcadas: 'Un hombre encapuchado te da una baraja. \"Escoge\", dice con una sonrisa sin labios. No importa qué carta saques; ya estás perdido. En esta ciudad, el destino se reparte con cada carta."
+        "Dicen que el Virus no elige… pero miente quien lo dice. Algunos despiertan con fuego en las venas, otros con sombras en los huesos. Y unos pocos… simplemente no despiertan.",
+        "A esta hora, solo los necios y los poderosos caminan sin miedo. Los Jokers se esconden entre las sombras de los callejones, y los Aces patrullan desde las alturas.",
+        "Un hombre encapuchado te da una baraja. \"Escoge\", dice con una sonrisa sin labios. No importa qué carta saques; ya estás perdido. En esta ciudad, el destino se reparte con cada carta."
     ]
 
     death_texts = [
-        "La Lotería Perdida: 'El virus te atraviesa como un rayo helado. En cuestión de segundos, tus venas se ennegrecen, y cada célula de tu cuerpo se descompone. No hay gritos, solo un instante de agonía.",
-        "Sufrimiento Silencioso: 'Caes de rodillas, incapaz de respirar. Tus órganos fallan en una sinfonía de agonía interna, cada latido de tu corazón un martillazo final. El mundo se oscurece, y te sumerges en la nada.",
-        "Carne y Ceniza: 'Sientes el fuego crecer dentro de ti. Intentas gritar, pero solo sale aire ardiente de tus labios. En segundos, tu piel se agrieta como tierra seca y te desmoronas en ceniza.",
-        "El Espejo Roto: 'Tu reflejo en el charco de sangre frente a ti es lo último que ves. Tu cuerpo se colapsa como un edificio demolido, piel destrozada, huesos que ceden bajo su propio peso. La oscuridad te envuelve.",
-        "El Susurro Final: 'Un escalofrío recorre tu espalda. De pronto, el mundo parece distante, borroso. Intentas moverte, pero ya no puedes. En un susurro, el virus toma su premio. El suelo se acerca rápidamente.",
-        "Cuerpos de Cristal: 'Cada célula de tu cuerpo se vuelve frágil como vidrio. Un movimiento más y colapsas en mil pedazos, un artefacto roto de una historia sin final. Solo queda el sonido del cristal al romperse."
+        "El virus te atraviesa como un rayo helado. En cuestión de segundos, tus venas se ennegrecen, y cada célula de tu cuerpo se descompone. No hay gritos, solo un instante de agonía.",
+        "Incapaz de respirar. Tus órganos fallan en una sinfonía de agonía interna, cada latido de tu corazón un martillazo final. El mundo se oscurece, y te sumerges en la nada.",
+        "Sientes el fuego crecer dentro de ti. Intentas gritar, pero solo sale aire ardiente de tus labios. En segundos, tu piel se agrieta como tierra seca y te desmoronas en ceniza.",
+        "Tu reflejo en el charco de sangre frente a ti es lo último que ves. Tu cuerpo se colapsa como un edificio demolido, piel destrozada, huesos que ceden bajo su propio peso. La oscuridad te envuelve.",
+        "Un escalofrío recorre tu espalda. De pronto, el mundo parece distante, borroso. Intentas moverte, pero ya no puedes. En un susurro, el virus toma su premio. El suelo se acerca rápidamente.",
+        "Cada célula de tu cuerpo se vuelve frágil como vidrio. Un movimiento más y colapsas en mil pedazos, un artefacto roto de una historia sin final. Solo queda el sonido del cristal al romperse."
     ]
 
     # 4. Diccionario de modificaciones (Quantum, Dones, Mega-Atributos)
