@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import time
 import base64
+import os
 from PIL import Image
 
 # 1. Configuración de la página centrada
@@ -41,10 +42,10 @@ st.markdown(
 )
 
 st.title("Wild Cards RPG - Extracción de Carta")
-st.write("Presiona el botón para extraer una carta y generar las características del personaje.")
+st.write("Saca una carta")
 
-# 2. Lectura del archivo Excel
-excel_path = r"C:\Users\Miliv\Desktop\Wild_Cards_RPG\cartas_list.xlsx"
+# 2. Lectura del archivo Excel (usando ruta relativa)
+excel_path = "cartas_list.xlsx"
 df_cartas = pd.read_excel(excel_path)
 df_cartas.columns = [col.strip() for col in df_cartas.columns]
 
@@ -193,7 +194,7 @@ def get_video_html(file_path, width=300):
 # 10. Lógica principal de la aplicación
 if st.button("Extraer Carta"):
     # Mostrar el video para generar expectación durante 5 segundos
-    video_path = r"C:\Users\Miliv\Desktop\Wild_Cards_RPG\mazo.mp4"
+    video_path = r"mazo.mp4"  # Ruta relativa (el archivo debe estar en la raíz del repositorio)
     video_placeholder = st.empty()
     video_html = get_video_html(video_path, width=300)
     video_placeholder.markdown(video_html, unsafe_allow_html=True)
@@ -202,7 +203,11 @@ if st.button("Extraer Carta"):
     
     # Extraer una carta aleatoria
     carta = df_cartas.sample(n=1).iloc[0]
+    # Suponiendo que en el Excel se guarda la ruta completa, usamos solo el nombre del archivo
     ruta = carta['Ruta Completa']
+    archivo_imagen = os.path.basename(ruta)
+    # Construir la ruta relativa para la imagen en la carpeta "cartas_naipes"
+    ruta_imagen = os.path.join("cartas_naipes", archivo_imagen)
     
     # Valor de la carta
     numero_original = str(carta['Carta']).strip()
@@ -213,14 +218,14 @@ if st.button("Extraer Carta"):
     pinta_lower = pinta_original.lower()
     pinta = suit_mapping.get(pinta_lower, "Desconocida")
     
-    # Mostrar imagen de la carta centrada usando columnas
-    cols = st.columns([1, 3, 1])
-    with cols[1]:
-        try:
-            imagen = Image.open(ruta)
-            st.image(imagen, caption=f"Carta: {numero_original} de {pinta_original}", width=300, use_container_width=False)
-        except Exception as e:
-            st.error(f"No se pudo cargar la imagen: {e}")
+    # Mostrar imagen de la carta centrada
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    try:
+        imagen = Image.open(ruta_imagen)
+        st.image(imagen, caption=f"Carta: {numero_original} de {pinta_original}", width=300, use_container_width=False)
+    except Exception as e:
+        st.error(f"No se pudo cargar la imagen: {e}")
+    st.markdown("</div>", unsafe_allow_html=True)
     
     # Verificar si la carta indica muerte (valores numéricos entre 5 y 10)
     is_death_card = False
@@ -243,7 +248,7 @@ if st.button("Extraer Carta"):
         st.markdown(f"<h4 style='text-align: center;'>{numero_original} de {pinta_original}</h4>", unsafe_allow_html=True)
         st.markdown(f"<p style='font-size: 1.2em; text-align: center;'>{desc_suit}</p>", unsafe_allow_html=True)
         
-        # Mostrar modificaciones de creación de personaje (centrado y sin bullets)
+        # Mostrar modificaciones de creación de personaje (centrado, sin bullets)
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         st.markdown("<h4>Creación de personaje:</h4>", unsafe_allow_html=True)
         if valor_carta == "A":
@@ -269,8 +274,7 @@ if st.button("Extraer Carta"):
         st.markdown("<p style='font-size: 1.2em;'>Puntos Extra: 15</p>", unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
         
-        # Mostrar bonus por valor de carta y pinta (centrado)
+        # Mostrar bonus por valor de carta y pinta (centrado) con explicación incluida
         bonus_text = bonus_table.get(valor_carta, {}).get(pinta, "Sin bonus definido")
-        # Incorporar en el texto la explicación de que el jugador debe elegir una de las tres habilidades (informativo)
         bonus_explicacion = f"{bonus_text} Este bonus se aplicará a una de las tres habilidades disponibles, a elección del jugador."
         st.markdown(f"<p style='font-size: 1.2em; text-align: center;'>Bonus por valor de carta y pinta: {bonus_explicacion}</p>", unsafe_allow_html=True)
